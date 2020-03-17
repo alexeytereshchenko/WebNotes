@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+
+<link rel="shortcut icon"
+	href="https://cdn1.iconfinder.com/data/icons/learning-and-entertainment-flat-icons/512/note.png">
+<title>Web Notes</title>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+		<a href="/notes" class="navbar-brand"> <img
+			src="https://cdn1.iconfinder.com/data/icons/learning-and-entertainment-flat-icons/512/note.png"
+			alt="logo" width="35" height="35">
+		</a> <a class="navbar-brand" href="/notes">Notes</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#coll" aria-controls="coll" aria-expanded="false"
+			aria-label="navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="coll">
+			<div class="navbar-nav mr-auto">
+				<a class="nav-item active nav-link" href="/notes/create">Create</a>
+				<a class="nav-item active nav-link" href="/api">API</a>
+			</div>
+
+			<form class="form-inline" th:action="@{/notes}" method="get">
+				<input class="form-control mr-sm-3"
+					style="background-color: #f7f7f7" type="search"
+					placeholder="Search by title" th:name="search">
+				<button class="btn btn-outline-success my-1" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row" th:if="notes">
+			<div class="col-md-4" th:each="note:${notes}">
+				<div class="card box-shadow m-4">
+		
+					<div class="card-header">
+						<h4 class="text-center" th:text="${note.title}"></h4>
+					</div>
+		
+					<div class="card-body" style="background-color: #eee">
+						<p class="card-text" th:text="${note.description}"></p>
+					</div>
+		
+					<button class="btn btn-success" data-toggle="modal"
+						data-target="#editModal"
+						th:attr="data-id=${note.id}, data-title=${note.title},
+					 data-description=${note.description}">Edit</button>
+		
+					<button class="btn btn-danger" data-toggle="modal"
+						data-target="#removeModal" th:attr="data-id=${note.id}">Remove</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Remove-->
+	<div class="modal fade" id="removeModal" tabindex="-1" role="dialog"
+		aria-labelledby="modalDeleteLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalDeleteLabel">Remove note</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="background-color: #eee">
+					Are you really want remove this note?
+				</div>
+				<div class="modal-footer">
+					<form th:action="@{notes/delete}" method="post">
+						<input type="hidden" id="id" th:name="id">
+						<div class="row">
+							<div class="col m-0">
+								<button class="btn btn-dark form-control" data-dismiss="modal">Cancel</button>
+							</div>
+							<div class="col m-0">
+								<button class="btn btn-danger form-control">Remove</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Edit modal -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+		aria-labelledby="editModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="exampleModalLabel">Edit note</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+				</div>
+				<form th:action="@{notes/edit}" th:method="post" th:object="${note}" >
+					<div class="modal-body" style="background-color: #eee">
+
+						<input type="hidden" th:field="*{id}" id="id">
+						<div class="form-group">
+							<label for="recipient-name" class="control-label">Title:</label>
+							<input type="text" class="form-control" id="title"
+								th:field="*{title}" required>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">Description:</label>
+							<textarea class="form-control" id="description"
+								th:field="*{description}" required></textarea>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
+	<script>
+            $('#removeModal').on('show.bs.modal', function (event) {
+                
+                var button = $(event.relatedTarget)
+                var recipient = button.data('id')
+                
+                var modal = $(this)
+                modal.find('#id').val(recipient)
+            })
+            
+            $('#editModal').on('show.bs.modal', function (event) {
+
+            	var button = $(event.relatedTarget)
+                var id = button.data('id')
+            	var title = button.data('title')
+                var description = button.data('description')
+                
+                var modal = $(this)
+
+                modal.find('#id').val(id)
+                modal.find('#title').val(title)
+                modal.find('#description').val(description)
+            
+            })
+            
+          </script>
+
+</body>
+</html>
