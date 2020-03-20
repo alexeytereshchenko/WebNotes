@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class NoteRestController {
-
+	
 	@Autowired
 	private NoteService NoteService;
 
