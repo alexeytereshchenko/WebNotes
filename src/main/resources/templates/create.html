@@ -52,10 +52,20 @@
 						<label for="card-title">Title:</label>
 						<input type="text" class="form-control my-2" id="card-title"
 							placeholder="title name" th:field="*{title}" required>
+						
+						<div class="alert alert-danger" role="alert"
+						 th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+  						</div>
+						
 						<label for="card-text">Description:</label>
 						<textarea class="form-control my-2" rows="3" id="card-text"
 							placeholder="description product..." th:field="*{description}" 
 							required></textarea>
+						
+						<div class="alert alert-danger" role="alert" 
+						th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+  						</div>
+  						
 					</div>
 					<button type="submit" class="btn btn-success">Create</button>
 				</form>

@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/notes")
 public class NoteController {
 
-	@Autowired NoteService noteService;
+	@Autowired
+	private NoteService noteService;
 
 	@GetMapping
 	public String Getnotes(@RequestParam(defaultValue = "") String search, Model model) {
@@ -37,9 +38,9 @@ public class NoteController {
 	}
 
 	@PostMapping("create")
-	public String createNote(@ModelAttribute @Valid Note note, BindingResult result) {
+	public String createNote(@ModelAttribute @Valid Note note, BindingResult result, Model model) {
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "create";
 		}
 		
@@ -48,7 +49,7 @@ public class NoteController {
 	}
 
 	@PostMapping("delete")
-	public String deleteNote(@RequestParam Integer id) {
+	public String deleteNote(Integer id) {
 		noteService.delete(id);
 		System.out.println("delete id:" + id);
 		return "redirect:/notes";

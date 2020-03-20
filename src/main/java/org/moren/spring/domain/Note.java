@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +20,11 @@ public class Note {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@NotEmpty
+
+	@NotBlank(message = "Title must not be empty!")
 	private String title;
-	@NotEmpty
+
+	@NotBlank(message = "Description must not be empty!")
 	private String description;
 
 }
