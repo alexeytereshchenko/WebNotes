@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class NoteRestController {
-	
-	@Autowired
+
 	private NoteService NoteService;
+
+	@Autowired
+	public void setNoteService(org.moren.spring.service.NoteService noteService) {
+		NoteService = noteService;
+	}
 
 	@GetMapping("/all")
 	public List<Note> api() {
