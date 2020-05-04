@@ -17,7 +17,7 @@
 <title>WebNotes</title>
 </head>
 <body>
-
+<header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 		<a href="/notes" class="navbar-brand"> <img
@@ -37,43 +37,45 @@
 			</div>
 		</div>
 	</nav>
+</header>
+	<main class="container-fluid">
+		<div class="row mt-4 justify-content-center">
+			<div class="col-10 col-md-6 col-lg-4 card shadow m-0 p-0">
+				<div class="card-header text-center">
+					<h4 class="my-0 font-weight-normal">Note</h4>
+				</div>
+				<div class="card-body" style="background-color: #eee">
+					<form class="form-horizontal" th:object="${note}"
+						th:action="@{create}" method="post">
+						<input type="hidden" th:field="*{id}">
+						<div class="form-group">
 
-	<div class="my-4 row justify-content-center">
-		<div class="card shadow col-3 m-0 p-0">
-			<div class="card-header text-center">
-				<h4 class="my-0 font-weight-normal">Note</h4>
-			</div>
-			<div class="card-body" style="background-color: #eee">
-				<form class="form-horizontal" th:object="${note}"
-					th:action="@{create}" method="post">
-					<input type="hidden" th:field="*{id}">
-					<div class="form-group">
+							<label for="card-title">Title:</label>
+							<input type="text" class="form-control mb-4" id="card-title"
+								placeholder="title name" th:field="*{title}" required>
 
-						<label for="card-title">Title:</label>
-						<input type="text" class="form-control mb-4" id="card-title"
-							placeholder="title name" th:field="*{title}" required>
+							<div class="alert alert-danger" role="alert"
+							 th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+							</div>
 
-						<div class="alert alert-danger" role="alert"
-						 th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-  						</div>
+							<label for="card-text">Description:</label>
+							<textarea class="form-control mb-4" rows="5" id="card-text"
+								placeholder="description product..." th:field="*{description}"
+								required></textarea>
 
-						<label for="card-text">Description:</label>
-						<textarea class="form-control mb-4" rows="5" id="card-text"
-							placeholder="description product..." th:field="*{description}" 
-							required></textarea>
-						
-						<div class="alert alert-danger" role="alert" 
-						th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
-  						</div>
-  						
-					</div>
-					<div class="row justify-content-center ">
-						<button type="submit" class="btn btn-success flex-fill mx-3">Create</button>
-					</div>
-					</form>
+							<div class="alert alert-danger" role="alert"
+							th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+							</div>
+
+						</div>
+						<div class="row justify-content-center ">
+							<button type="submit" class="btn btn-success flex-fill mx-3">Create</button>
+						</div>
+						</form>
+				</div>
 			</div>
 		</div>
-	</div>
+	</main>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
