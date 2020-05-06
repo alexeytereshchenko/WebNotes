@@ -17,14 +17,14 @@ import lombok.NoArgsConstructor;
 @Table(schema = "notes")
 public class Note {
 
-	@Id
-	@GeneratedValue
-	private Integer id;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
-	@NotBlank(message = "Title must not be empty!")
-	private String title;
+    @NotBlank(message = "Title must not be empty!")
+    private String title;
 
-	@NotBlank(message = "Description must not be empty!")
-	private String description;
+    @NotBlank(message = "Description must not be empty!")
+    private String description;
 
 }
