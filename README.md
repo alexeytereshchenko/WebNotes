@@ -9,18 +9,14 @@ https://webnotes3995.herokuapp.com/notes
 
 ---
 
-You need clone this repository, add your DB (url, username, password) to /src/main/resources/application.properties
+## How it run?
 
-After you can run this in console:
+**with docker-compose**
 
-linux/macOS
+1. into root project:
 
-    chmod +x mvnw && ./mvnw spring-boot:run
+        docker-compose up
 
-windows
+2. browser:
 
-    mvnw spring-boot:run
-    
-Browser:
-    
-    localhost:8080    
+        localhost:8080
