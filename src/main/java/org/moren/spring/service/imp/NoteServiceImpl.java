@@ -1,35 +1,35 @@
 package org.moren.spring.service.imp;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.moren.spring.domain.Note;
+import lombok.AllArgsConstructor;
+import org.moren.spring.model.Note;
+import org.moren.spring.model.User;
 import org.moren.spring.repository.NoteRepository;
 import org.moren.spring.service.NoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
+@AllArgsConstructor
 public class NoteServiceImpl implements NoteService {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private NoteRepository noteRepository;
-
-    @Autowired
-    public void setNoteRepository(NoteRepository noteRepository) {
-        this.noteRepository = noteRepository;
-    }
+    private final NoteRepository noteRepository;
 
     @Override
-    public void save(Note note) {
+    public void save(Note note, User user) {
+        note.setUser(user);
         noteRepository.save(note);
         log.debug("Save {}", note);
     }
 
     @Override
-    public void update(Note note) {
+    public void update(Note note, User user) {
+        note.setUser(user);
         noteRepository.save(note);
         log.debug("Update {}", note);
     }
@@ -41,8 +41,12 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> getAll() {
-        return noteRepository.findByOrderByIdDesc();
+    public List<Note> getAll(User user) {
+        return noteRepository.findByUserId(user.getId())
+                .stream()
+                .sorted((note1, note2) -> note2.getId().compareTo(note1.getId()))
+                .collect(Collectors.toList());
+
     }
 
     @Override

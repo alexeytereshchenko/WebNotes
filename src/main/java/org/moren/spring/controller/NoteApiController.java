@@ -1,27 +1,28 @@
 package org.moren.spring.controller;
 
+import lombok.AllArgsConstructor;
+import org.moren.spring.model.Note;
+import org.moren.spring.model.User;
+import org.moren.spring.service.NoteService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 import java.util.Optional;
 
-import org.moren.spring.domain.Note;
-import org.moren.spring.service.NoteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class NoteApiController {
 
-	private NoteService NoteService;
-
-	@Autowired
-	public void setNoteService(org.moren.spring.service.NoteService noteService) {
-		NoteService = noteService;
-	}
+	private final NoteService NoteService;
 
 	@GetMapping("/all")
-	public List<Note> api() {
-		return NoteService.getAll();
+	public List<Note> api(@AuthenticationPrincipal User user) {
+		return NoteService.getAll(user);
 	}
 	
 	@GetMapping("{id}")
