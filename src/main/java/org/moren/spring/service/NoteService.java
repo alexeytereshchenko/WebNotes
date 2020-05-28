@@ -10,10 +10,9 @@ public interface NoteService {
 
 	void save(Note note, User user);
 	void update(Note note, User user);
-	void delete(Integer noteId);
+	void delete(Integer noteId, User user);
 	List<Note> getAll(User user);
-	Optional<Note> getById(Integer id);
-	List<Note> getByTitle(String title);
-	List<Note> getByDescription(String description);
-
+	Optional<Note> getById(Integer id, User user);
+	List<Note> getByTitle(String title, User user);
+	List<Note> getByDescription(String description, User user);
 }

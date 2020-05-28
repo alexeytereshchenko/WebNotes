@@ -28,7 +28,7 @@ public class NoteController {
 		if (search.equals("")) {
 			model.addAttribute("notes", noteService.getAll(user));
 		} else {
-			model.addAttribute("notes", noteService.getByTitle(search));
+			model.addAttribute("notes", noteService.getByTitle(search, user));
 		}
 
 		return "notes";
@@ -41,7 +41,7 @@ public class NoteController {
 	}
 
 	@PostMapping("create")
-	public String createNote(@AuthenticationPrincipal User user,
+	public String createNote(@AuthenticationPrincipal @Valid User user,
 							 @ModelAttribute @Valid Note note,
 							 BindingResult result,
 							 Model model) {
@@ -54,13 +54,14 @@ public class NoteController {
 	}
 
 	@PostMapping("delete")
-	public String deleteNote(Integer id) {
-		noteService.delete(id);
+	public String deleteNote(Integer id,
+							 @AuthenticationPrincipal @Valid User user) {
+		noteService.delete(id, user);
 		return "redirect:/notes";
 	}
 
 	@PostMapping("edit")
-	public String editNote(@AuthenticationPrincipal User user,
+	public String editNote(@AuthenticationPrincipal @Valid User user,
 						   @ModelAttribute @Valid Note note,
 						   BindingResult result) {
 		if(result.hasErrors()) {

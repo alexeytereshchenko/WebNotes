@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -18,11 +20,13 @@ public class User implements UserDetails {
     @GeneratedValue
     private Integer id;
 
+    @NotNull
+    @Size(min = 3, max = 20, message = "Username have min 3 and max 20 symbols")
     private String username;
-    private String password;
 
-    @Transient
-    private String passwordConfirm;
+    @NotNull
+    @Size(min = 3, message = "Password have to min 3 symbols")
+    private String password;
 
     private String gender = "none";
 

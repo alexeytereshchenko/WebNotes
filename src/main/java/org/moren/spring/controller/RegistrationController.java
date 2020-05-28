@@ -2,7 +2,7 @@ package org.moren.spring.controller;
 
 import lombok.AllArgsConstructor;
 import org.moren.spring.model.User;
-import org.moren.spring.service.imp.UserServiceImp;
+import org.moren.spring.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class RegistrationController {
 
-    private final UserServiceImp userService;
+    private final UserService userService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -26,14 +26,14 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") @Valid User userForm,
+    public String addUser(@ModelAttribute("user") @Valid User user,
                           BindingResult bindingResult,
                           Model model) {
 
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        if (!userService.save(userForm)){
+        if (!userService.save(user)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }

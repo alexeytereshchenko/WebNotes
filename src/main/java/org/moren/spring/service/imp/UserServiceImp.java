@@ -47,10 +47,6 @@ public class UserServiceImp implements UserService {
             return false;
         }
 
-        if (user.getPassword().equals(user.getPasswordConfirm())) {
-            return false;
-        }
-
         Role role = roleRepository.findByName("ROLE_USER").get();
 
         user.setRoles(Collections.singleton(role));

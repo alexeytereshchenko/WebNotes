@@ -4,7 +4,7 @@ services:
     container_name: app
     build: .
     ports:
-    - 8080:8080
+    - 8080:8081
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/WebNotes
     depends_on:
@@ -19,5 +19,5 @@ services:
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: postgres
-      POSTGRES_DB: WebNotes
+      POSTGRES_DB: 'WebNotes'
     restart: always

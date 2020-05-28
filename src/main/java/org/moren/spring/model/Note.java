@@ -3,11 +3,8 @@ package org.moren.spring.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -18,12 +15,12 @@ public class Note {
     @GeneratedValue
     private Integer id;
 
-    @NotBlank(message = "Title must not be empty!")
+    @NotNull
     private String title;
 
-    @NotBlank(message = "Description must not be empty!")
+    @NotNull
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     User user;
 }

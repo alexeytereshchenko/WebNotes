@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,18 +27,21 @@ public class NoteApiController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Note> apiById(@PathVariable Integer id) {
-		return NoteService.getById(id);
+	public Optional<Note> apiById(@PathVariable Integer id,
+								  @AuthenticationPrincipal @Valid User user) {
+		return NoteService.getById(id, user);
 	}
 	
 	@GetMapping({"title/{title}"})
-	public List<Note> apiByTitle(@PathVariable String title) {
-		return NoteService.getByTitle(title);
+	public List<Note> apiByTitle(@PathVariable String title,
+								 @AuthenticationPrincipal @Valid User user) {
+		return NoteService.getByTitle(title, user);
 	}
 	
 	@GetMapping("description/{description}")
-	public List<Note> apiByDescription(@PathVariable String description) {
-		return NoteService.getByDescription(description);
+	public List<Note> apiByDescription(@PathVariable String description,
+									   @AuthenticationPrincipal @Valid User user) {
+		return NoteService.getByDescription(description, user);
 	}
 
 }
