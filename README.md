@@ -1,7 +1,7 @@
 # WebNotes
 You can create, edit and delete your notes
 
-https://webnotes3995.herokuapp.com/notes
+https://webnotes3995.herokuapp.com
 
 ---
 
