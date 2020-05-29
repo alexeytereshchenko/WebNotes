@@ -1,9 +1,9 @@
 package org.moren.spring.controller;
 
-import lombok.AllArgsConstructor;
 import org.moren.spring.model.Note;
 import org.moren.spring.model.User;
 import org.moren.spring.service.NoteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +14,9 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/notes")
-@AllArgsConstructor
 public class NoteController {
 
-	private final NoteService noteService;
+	private NoteService noteService;
 
 	@GetMapping
 	public String getNotes(@AuthenticationPrincipal User user,
@@ -72,4 +71,8 @@ public class NoteController {
 		return "redirect:/";
 	}
 
+	@Autowired
+	public void setNoteService(NoteService noteService) {
+		this.noteService = noteService;
+	}
 }

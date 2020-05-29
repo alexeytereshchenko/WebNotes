@@ -1,12 +1,12 @@
 package org.moren.spring.service.imp;
 
-import lombok.AllArgsConstructor;
 import org.moren.spring.model.Note;
 import org.moren.spring.model.User;
 import org.moren.spring.repository.NoteRepository;
 import org.moren.spring.service.NoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +14,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class NoteServiceImp implements NoteService {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private final NoteRepository noteRepository;
+    private NoteRepository noteRepository;
 
     @Override
     public void save(Note note, User user) {
@@ -64,4 +63,8 @@ public class NoteServiceImp implements NoteService {
         return noteRepository.findById(id);
     }
 
+    @Autowired
+    public void setNoteRepository(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 }

@@ -9,9 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "roles")
 @Data
 @NoArgsConstructor
+@Entity(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id

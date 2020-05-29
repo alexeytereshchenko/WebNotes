@@ -11,9 +11,9 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
-@Entity(name = "users")
 @Data
 @NoArgsConstructor
+@Entity(name = "users")
 public class User implements UserDetails {
 
     @Id

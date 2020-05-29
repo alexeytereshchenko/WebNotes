@@ -1,8 +1,8 @@
 package org.moren.spring.controller;
 
-import lombok.AllArgsConstructor;
 import org.moren.spring.model.User;
 import org.moren.spring.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
-@AllArgsConstructor
 public class RegistrationController {
 
-    private final UserService userService;
+    private UserService userService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -39,5 +38,10 @@ public class RegistrationController {
         }
 
         return "redirect:/";
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }
