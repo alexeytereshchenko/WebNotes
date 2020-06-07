@@ -21,12 +21,15 @@ public class User implements UserDetails {
     private Integer id;
 
     @NotNull
-    @Size(min = 3, max = 20, message = "Username have min 3 and max 20 symbols")
+    @Size(min = 3, max = 20, message = "Username can have 3+ symbols")
     private String username;
 
     @NotNull
-    @Size(min = 3, message = "Password have to min 3 symbols")
+    @Size(min = 3, message = "Password can have 3+ symbols")
     private String password;
+
+    @Transient
+    private String confirmPassword;
 
     private String gender = "none";
 
