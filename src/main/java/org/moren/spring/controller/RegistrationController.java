@@ -31,14 +31,10 @@ public class RegistrationController {
 
         if (bindingResult.hasErrors()) {
             return "registration";
-        }
-
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
+        } else if (!user.getPassword().equals(user.getConfirmPassword())) {
             model.addAttribute("passNotEquals", "passwords isn't equals");
             return "registration";
-        }
-
-        if (!userService.save(user)){
+        } else if (!userService.save(user)){
             model.addAttribute("usernameError", "A user with the same name already exists.");
             return "registration";
         }
