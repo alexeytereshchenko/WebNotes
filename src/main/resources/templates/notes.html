@@ -74,7 +74,6 @@
 									data-target="#removeModal" th:attr="data-id=${note.id}">Remove</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -131,9 +130,9 @@
 
 						<input type="hidden" th:field="*{id}" id="id">
 						<div class="form-group">
-							<label for="recipient-name" class="control-label">Title:</label>
+							<label for="title" class="control-label">Title:</label>
 							<input type="text" class="form-control" id="title"
-								th:field="*{title}" required>
+															  th:field="*{title}">
 							
 							<div class="alert alert-danger" role="alert"
 						 	th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
@@ -141,9 +140,9 @@
 
 						</div>
 						<div class="form-group">
-							<label for="message-text" class="control-label">Description:</label>
+							<label for="description" class="control-label">Description:</label>
 							<textarea class="form-control" id="description" rows="5"
-								th:field="*{description}" required></textarea>
+								th:field="*{description}"></textarea>
 						</div>
 
 						<div class="alert alert-danger" role="alert" 
@@ -176,22 +175,22 @@
 
 	<script>
             $('#removeModal').on('show.bs.modal', function (event) {
-                
-                var button = $(event.relatedTarget)
-                var recipient = button.data('id')
-                
-                var modal = $(this)
-                modal.find('#id').val(recipient)
+
+				const button = $(event.relatedTarget);
+				const recipient = button.data('id')
+
+				const modal = $(this);
+				modal.find('#id').val(recipient)
             })
             
             $('#editModal').on('show.bs.modal', function (event) {
 
-            	var button = $(event.relatedTarget)
-                var id = button.data('id')
-            	var title = button.data('title')
-                var description = button.data('description')
-                
-                var modal = $(this)
+            	const button = $(event.relatedTarget)
+				const id = button.data('id')
+				const title = button.data('title')
+				const description = button.data('description')
+
+				const modal = $(this)
 
                 modal.find('#id').val(id)
                 modal.find('#title').val(title)
