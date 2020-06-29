@@ -22,5 +22,5 @@ public class Note {
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    User user;
+    private User user;
 }
