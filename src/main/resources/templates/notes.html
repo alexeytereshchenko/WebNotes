@@ -34,13 +34,14 @@
 		<div class="collapse navbar-collapse" id="coll">
 			<div class="navbar-nav mr-auto">
 				<a class="nav-item active nav-link" href="/notes/create">Create</a>
+				<a class="nav-item active nav-link" href="/actuator"
+				   th:if="${#request.isUserInRole('ADMIN')}">Actuator</a>
 			</div>
 
 			<form class="form-inline" th:action="@{/notes}" method="get">
 				<input class="form-control mr-sm-3"
 					style="background-color: #f7f7f7" type="search"
 					placeholder="Search by title" th:name="search">
-<!--				<button class="btn btn-outline-success my-1" type="submit">Search</button>-->
 			</form>
 			<form class="form-inline" th:action="@{/logout}" method="post">
 				<button class="btn btn-outline-danger my-1" type="submit">Sign Out</button>
