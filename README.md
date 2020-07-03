@@ -1,9 +1,4 @@
 # WebNotes
-You can create, edit and delete your notes
-
-https://webnotes3995.herokuapp.com
-
----
 
 ***file system.properties needs for deploy to heroku***
 
@@ -20,3 +15,5 @@ https://webnotes3995.herokuapp.com
 2. browser:
 
         localhost:8080
+
+**Login and password for admin account is** *'admin' 'admin'*
