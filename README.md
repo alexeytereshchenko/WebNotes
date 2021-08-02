@@ -1,7 +1,5 @@
 # WebNotes
 
-***file system.properties needs for deploy to heroku***
-
 ---
 
 ## How it run?
@@ -14,6 +12,10 @@
 
 2. browser:
 
-        localhost:8080
+        http://localhost:8080
 
-**Login and password for admin account is** *'admin' 'admin'*
+---
+
+### Login and password for admin account:
+
+      admin
