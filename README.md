@@ -8,7 +8,7 @@
 
 1. into root project:
 
-        docker-compose up
+       sudo docker-compose up
 
 2. browser:
 
