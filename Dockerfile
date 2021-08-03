@@ -1,4 +1,9 @@
-FROM openjdk:11
+FROM adoptopenjdk:11-jdk-hotspot as builder
+WORKDIR /build
+COPY . .
+RUN ["./mvnw", "package", "-Dmaven.test.skip=true"]
+
+FROM adoptopenjdk:11-jre-hotspot
 WORKDIR /app
-COPY /target/WebNotes-0.0.1-SNAPSHOT.jar WebNotes.jar
-ENTRYPOINT ["java", "-jar", "WebNotes.jar"]
+COPY --from=builder "/build/target/WebNotes.jar" .
+CMD ["java", "-jar", "WebNotes.jar"]

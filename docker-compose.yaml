@@ -1,10 +1,10 @@
-version: '3.7'
+version: '3.8'
 services:
   app:
     container_name: app
     build: .
     ports:
-    - 8080:8080
+    - "9999:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/WebNotes
     depends_on:
@@ -15,9 +15,12 @@ services:
     container_name: db
     image: postgres:12-alpine
     ports:
-    - 33333:5432
+    - "33333:5432"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: postgres
       POSTGRES_DB: 'WebNotes'
+      PGDATA: /pg-data
+    volumes:
+      - ./pg-data:/pg-data
     restart: always
